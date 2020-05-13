@@ -3,10 +3,13 @@ import Nav from '../components/Nav'
 
 function MainLayout ({ children }) {
   return (
-    <div>
+    <div className="bg-primary">
       <Nav/>
-      {children}
+      <main className="container mx-auto">
+        {children}
+      </main>
     </div>
+
   )
 }
 
