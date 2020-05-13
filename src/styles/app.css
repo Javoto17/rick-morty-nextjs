@@ -1,6 +1,5 @@
 @tailwind base;
 @tailwind components;
-@import "tailwindcss/base";
 
 @font-face {
   font-family: "RickMortyFont";
@@ -24,10 +23,6 @@
   line-height: 1.15;
 }
 
-
-
-@tailwind utilities;
-
 .text-field {
   @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight ;
 }
@@ -35,3 +30,6 @@
 .text-field:focus {
   @apply outline-none bg-white;
 }
+
+@tailwind utilities;
+

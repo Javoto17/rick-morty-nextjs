@@ -20,7 +20,7 @@ function Home({ characters }) {
   return (
     <MainLayout>
       <div className="py-20">
-        <h1 className="title mx-auto px-8">Rick and Morty</h1>
+        <h1 className="title my-4 mx-8">Rick and Morty</h1>
         <div className="mx-auto sm:w-1/4 md:w-3/4 lg:w-3/4 xl:w-3/4 w-3/4 w-full px-8">
           <form className="flex flex-row shadow rounded">
             <input
