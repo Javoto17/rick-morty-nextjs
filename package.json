@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "prod": "next dev && next start",
+    "prod": "next build && next start",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --colors",
@@ -18,12 +18,10 @@
     "@fortawesome/react-fontawesome": "^0.1.9",
     "axios": "^0.19.2",
     "next": "9.4.0",
-    "postcss-preset-env": "^6.7.0",
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-hook-form": "^5.6.3",
-    "tailwindcss": "^1.4.6"
+    "react-hook-form": "^5.6.3"
   },
   "devDependencies": {
     "babel-jest": "^26.0.1",
@@ -41,6 +39,8 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-standard": "^4.0.1",
     "jest": "^26.0.1",
-    "react-test-renderer": "^16.13.1"
+    "react-test-renderer": "^16.13.1",
+    "postcss-preset-env": "^6.7.0",
+    "tailwindcss": "^1.4.0"
   }
 }
