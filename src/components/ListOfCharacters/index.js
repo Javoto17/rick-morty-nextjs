@@ -36,7 +36,7 @@ const ListOfCharacters = ({ data }) => {
 ListOfCharacters.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string
+      id: PropTypes.number
     })
   )
 }

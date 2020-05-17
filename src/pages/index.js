@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useForm } from 'react-hook-form'
 
@@ -28,12 +28,12 @@ const initialFilter = {
 }
 
 function Home ({ characters }) {
-  const [listOfCharacters, setListOfCharacters] = useState([])
+  const [listOfCharacters, setListOfCharacters] = useState(characters)
   const [filter, setFilter] = useState(initialFilter)
   const refEnd = useRef(null)
   const { isNearScreen } = useNearScreen({
-    rootMargin: '200px',
-    externalRef: refEnd
+    rootMargin: '100px',
+    externalRef: listOfCharacters && !!listOfCharacters.length ? refEnd : 0
   }, false)
 
   useEffect(() => {
@@ -50,18 +50,23 @@ function Home ({ characters }) {
 
   const { register, handleSubmit } = useForm()
 
-  const onSubmit = ({ name }) =>
+  const onSubmit = ({ name }) => {
     setFilter({
       ...filter,
       name,
       page: 1
     })
+  }
+
+  const onScroll = useCallback(() => {
+    setFilter({ ...filter, page: filter.page + 1 })
+  }, [isNearScreen])
 
   useEffect(() => {
     if (isNearScreen) {
-      setFilter({ ...filter, page: filter.page + 1 })
+      onScroll()
     }
-  }, [isNearScreen])
+  }, [onScroll, isNearScreen])
 
   return (
     <MainLayout>
@@ -96,16 +101,16 @@ function Home ({ characters }) {
   )
 }
 
-// export async function getStaticProps () {
-//   const res = await characterService.getAllCharacters(null)
-//   const characters = res.results
+export async function getStaticProps () {
+  const res = await characterService.getAllCharacters(null)
+  const characters = res.results
 
-//   return {
-//     props: {
-//       characters
-//     }
-//   }
-// }
+  return {
+    props: {
+      characters
+    }
+  }
+}
 
 Home.defaultProps = {
   characters: []

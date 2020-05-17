@@ -23,22 +23,24 @@ const useNearScreen = (options, once = true) => {
       }
     }
 
-    Promise.resolve(
-      typeof IntersectionObserver !== 'undefined'
-        ? IntersectionObserver
-        : intersection
-    ).then(() => {
-      observer = new IntersectionObserver(onChange,
-        {
-          threshold,
-          rootMargin,
-          root
-        }
-      )
-      observer.observe(element)
-    })
-    return () => {
-      observer && observer.disconnect()
+    if (element) {
+      Promise.resolve(
+        typeof IntersectionObserver !== 'undefined'
+          ? IntersectionObserver
+          : intersection
+      ).then(() => {
+        observer = new IntersectionObserver(onChange,
+          {
+            threshold,
+            rootMargin,
+            root
+          }
+        )
+        observer.observe(element)
+      })
+      return () => {
+        observer && observer.disconnect()
+      }
     }
   }, [options])
 

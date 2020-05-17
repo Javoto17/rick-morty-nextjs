@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -12,10 +12,6 @@ const CardCharacter = ({ character }) => {
   const { isNearScreen, fromRef } = useNearScreen({
     threshold: 0.1
   })
-
-  // useEffect(() => {
-  //   console.log(isNearScreen)
-  // }, [isNearScreen])
 
   const { origin, status, name, image, gender, location, species } = character
 
@@ -74,15 +70,18 @@ const CardCharacter = ({ character }) => {
 
 CardCharacter.propTypes = {
   character: PropTypes.shape({
-    origin: PropTypes.string,
+    origin: PropTypes.shape({
+      name: PropTypes.string
+    }),
     status: PropTypes.string,
+    location: PropTypes.shape({
+      name: PropTypes.string
+    }),
     name: PropTypes.string,
     image: PropTypes.string,
     gender: PropTypes.string,
-    location: PropTypes.string,
     species: PropTypes.string
   })
-
 }
 
 export default CardCharacter

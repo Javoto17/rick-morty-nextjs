@@ -17,7 +17,7 @@ async function getAllCharacters (filter = {
   gender: null
 }) {
   let url = `${config.api}character/`
-  console.log(arguments)
+
   if (filter) {
     const paramsKey = Object.keys(filter)
 
@@ -35,7 +35,6 @@ async function getAllCharacters (filter = {
     const res = await axios.get(url)
     return res.data
   } catch (error) {
-    console.log(error)
     return {
       results: []
     }
