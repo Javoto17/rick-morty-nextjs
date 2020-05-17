@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 
 import { useRouter } from 'next/router'
+import MainLayout from '../../layouts/MainLayout'
 
 const Character = ({ character }) => {
   // const router = useRouter()
@@ -12,6 +13,12 @@ const Character = ({ character }) => {
   if (router.isFallback) {
     return <div>Loading...</div>
   }
+
+  return (
+    <MainLayout>
+      {character.toString()}
+    </MainLayout>
+  )
 }
 
 export async function getStaticPaths () {
@@ -21,8 +28,6 @@ export async function getStaticPaths () {
     params: { id: character.id.toString() }
   }))
 
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
   return { paths, fallback: false }
 }
 
@@ -33,7 +38,6 @@ export async function getStaticProps ({ params }) {
   )
   const character = res.data
 
-  // Pass post data to the page via props
   return { props: { character } }
 }
 
