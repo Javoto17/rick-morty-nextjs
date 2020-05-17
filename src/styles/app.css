@@ -21,8 +21,7 @@
 
 .title {
   font-family: 'RickMortyFont';
-  @apply text-5xl text-center;
-  color: #333;
+  @apply text-6xl text-center text-gray-800;
   line-height: 1.15;
 }
 
@@ -33,5 +32,9 @@
 .text-field:focus {
   @apply outline-none bg-white;
 }
+
+/* .grid-cards {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+} */
 
 

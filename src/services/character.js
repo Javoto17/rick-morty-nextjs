@@ -8,10 +8,38 @@ async function getCharacter (id) {
   return character
 }
 
-async function getAllCharacters () {
-  const characters = await axios.get(`${config.api}/character/`)
+async function getAllCharacters (filter = {
+  page: null,
+  name: null,
+  status: null,
+  species: null,
+  type: null,
+  gender: null
+}) {
+  let url = `${config.api}character/`
+  console.log(arguments)
+  if (filter) {
+    const paramsKey = Object.keys(filter)
 
-  return characters
+    const params = paramsKey.filter(key => filter[key])
+
+    params.map((key, i) => {
+      const prefix = i === 0 ? '?' : '&'
+      if (filter[key]) {
+        url += `${prefix}${key}=${filter[key]}`
+      }
+    })
+  }
+
+  try {
+    const res = await axios.get(url)
+    return res.data
+  } catch (error) {
+    console.log(error)
+    return {
+      results: []
+    }
+  }
 }
 
 async function getMultipleCharacters (listOfIds) {
@@ -26,8 +54,4 @@ async function getMultipleCharacters (listOfIds) {
   return characters
 }
 
-export {
-  getCharacter,
-  getAllCharacters,
-  getMultipleCharacters
-}
+export { getCharacter, getAllCharacters, getMultipleCharacters }

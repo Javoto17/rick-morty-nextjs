@@ -1,11 +1,11 @@
 import React from 'react'
 import Nav from '../components/Nav'
 
-function MainLayout({ children }) {
+function MainLayout ({ children }) {
   return (
-    <div className="bg-primary">
+    <div className='bg-primary'>
       <Nav />
-      <main className="container mx-auto bg-primary">
+      <main className='container mx-auto bg-primary'>
         {children}
       </main>
     </div>

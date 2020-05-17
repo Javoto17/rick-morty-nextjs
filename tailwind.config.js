@@ -8,9 +8,16 @@ module.exports = {
     backgroundColor: theme => ({
       ...theme('colors'),
       primary: '#c2e8c9',
-      secondary: '#0aa3c0',
+      secondary: '#0aa3c0'
+    }),
+    textColor: theme => ({
+      ...theme('colors'),
+      primary: '#c2e8c9',
+      secondary: '#0aa3c0'
     })
   },
-  variants: {},
+  variants: {
+    backgroundColor: ['responsive', 'hover', 'focus', 'active']
+  },
   plugins: []
 }

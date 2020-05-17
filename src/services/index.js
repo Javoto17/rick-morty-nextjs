@@ -1,5 +1,3 @@
 import * as characterService from './character'
 
-export {
-  characterService
-}
+export { characterService }

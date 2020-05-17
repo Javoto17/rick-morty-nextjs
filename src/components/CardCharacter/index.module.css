@@ -1,0 +1,12 @@
+.imagecard{
+    @apply w-full bg-gray-200;
+    min-height: 256px;
+}
+
+.infoCardTitle{
+    @apply font-medium pr-2 text-left inline-block;
+}
+
+.infoCardText{
+    @apply text-right font-normal inline-block w-full text-base;
+}

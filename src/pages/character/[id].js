@@ -1,29 +1,23 @@
 import React from 'react'
-import Axios from 'axios'
+import axios from 'axios'
 
 import { useRouter } from 'next/router'
 
 const Character = ({ character }) => {
   // const router = useRouter()
   const router = useRouter()
-  console.log(character
-  )
+  console.log(character)
   // If the page is not yet generated, this will be displayed
   // initially until getStaticProps() finishes running
   if (router.isFallback) {
     return <div>Loading...</div>
   }
-  return (
-    <div>
-      hola
-    </div>
-  )
 }
 
 export async function getStaticPaths () {
-  const res = await Axios.get('https://rickandmortyapi.com/api/character/')
+  const res = await axios.get('https://rickandmortyapi.com/api/character/')
   const characters = res.data.results
-  const paths = characters.map(character => ({
+  const paths = characters.map((character) => ({
     params: { id: character.id.toString() }
   }))
 
@@ -34,7 +28,9 @@ export async function getStaticPaths () {
 
 // This also gets called at build time
 export async function getStaticProps ({ params }) {
-  const res = await Axios.get(`https://rickandmortyapi.com/api/character/${params.id}`)
+  const res = await axios.get(
+    `https://rickandmortyapi.com/api/character/${params.id}`
+  )
   const character = res.data
 
   // Pass post data to the page via props

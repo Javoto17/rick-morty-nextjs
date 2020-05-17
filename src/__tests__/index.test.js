@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 // Components
-import IndexPage from '../src/pages/index'
+import IndexPage from '../pages/index'
 
 describe('Home Page Test', () => {
   it('Should have an image', () => {
