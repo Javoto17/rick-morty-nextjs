@@ -24,23 +24,37 @@ const initialFilter = {
   species: null,
   type: null,
   gender: null,
-  page: null
+  page: 1
 }
 
 function Home ({ characters }) {
   const [listOfCharacters, setListOfCharacters] = useState(characters)
   const [filter, setFilter] = useState(initialFilter)
   const refEnd = useRef(null)
-  const { isNearScreen } = useNearScreen({
-    rootMargin: '100px',
-    externalRef: listOfCharacters && !!listOfCharacters.length ? refEnd : 0
-  }, false)
+
+  const { isNearScreen, fromRef } = useNearScreen(
+    {
+      rootMargin: '200px',
+      threshold: 0.5
+    },
+    false
+  )
+
+  useEffect(() => {
+    if (document) {
+      console.log(document.querySelector('#visor-end-list'))
+      console.log(refEnd.current)
+    }
+  }, [])
 
   useEffect(() => {
     async function getCharacters () {
+      console.log(filter.page)
       const { info, results } = await characterService.getAllCharacters(filter)
       if (info && results) {
-        setListOfCharacters(filter.page !== 1 ? [...listOfCharacters, ...results] : results)
+        setListOfCharacters(
+          filter.page !== 1 ? [...listOfCharacters, ...results] : results
+        )
       }
     }
     if (!compare(filter, initialFilter)) {
@@ -63,30 +77,34 @@ function Home ({ characters }) {
   }, [isNearScreen])
 
   useEffect(() => {
+    console.log(isNearScreen)
     if (isNearScreen) {
+      console.log('boom')
       onScroll()
     }
   }, [onScroll, isNearScreen])
 
   return (
     <MainLayout>
-      <div className="py-20">
-        <h1 className="title my-16 mx-8">Rick and Morty</h1>
-        <div className="mx-auto sm:w-1/4 md:w-3/4 lg:w-3/4 xl:w-3/4 w-3/4 w-full px-8">
+      <div className='py-20'>
+        <h1 className='title my-16 mx-8'>Rick and Morty</h1>
+        <div className='mx-auto sm:w-1/4 md:w-3/4 lg:w-3/4 xl:w-3/4 w-3/4 w-full px-8'>
           <form
-            className="flex flex-row shadow rounded"
-            onSubmit={handleSubmit(onSubmit)}>
+            className='flex flex-row shadow rounded'
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <input
-              className="h-16 bg-gray-100 text-grey-darker py-2 font-normal text-grey-darkest border border-gray-100 font-bold w-full py-1 px-2 pl-2 outline-none text-lg text-gray-600 rounded-l focus:border-current focus:border-1"
-              type="text"
-              placeholder="Character"
-              name="name"
+              className='h-16 bg-gray-100 text-grey-darker py-2 font-normal text-grey-darkest border border-gray-100 font-bold w-full py-1 px-2 pl-2 outline-none text-lg text-gray-600 rounded-l focus:border-current focus:border-1'
+              type='text'
+              placeholder='Character'
+              name='name'
               ref={register}
             />
-            <span className="flex bg-gray-100 rounded-r rounded-l-none border-0 ">
+            <span className='flex bg-gray-100 rounded-r rounded-l-none border-0 '>
               <button
-                className="bg-secondary hover:opacity-75 focus:outline-none text-lg text-white md:py-3 md:px-6 px-4 py-4 rounded-r"
-                type="submit">
+                className='bg-secondary hover:opacity-75 focus:outline-none text-lg text-white md:py-3 md:px-6 px-4 py-4 rounded-r'
+                type='submit'
+              >
                 <FontAwesomeIcon icon={faSearch} />
               </button>
             </span>
@@ -96,7 +114,7 @@ function Home ({ characters }) {
 
       <ListOfCharacters data={listOfCharacters} />
 
-      <div id="visor-end-list" ref={refEnd}></div>
+      <div id='visor-end-list' ref={fromRef} style={{ height: '0px' }}></div>
     </MainLayout>
   )
 }

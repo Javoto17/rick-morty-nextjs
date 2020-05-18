@@ -29,20 +29,18 @@ const useNearScreen = (options, once = true) => {
           ? IntersectionObserver
           : intersection
       ).then(() => {
-        observer = new IntersectionObserver(onChange,
-          {
-            threshold,
-            rootMargin,
-            root
-          }
-        )
+        observer = new IntersectionObserver(onChange, {
+          threshold,
+          rootMargin,
+          root
+        })
         observer.observe(element)
       })
       return () => {
         observer && observer.disconnect()
       }
     }
-  }, [options])
+  }, [root, rootMargin, threshold, externalRef, fromRef])
 
   return { isNearScreen, fromRef }
 }

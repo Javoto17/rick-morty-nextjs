@@ -1,7 +1,9 @@
 import React from 'react'
 import axios from 'axios'
+import PropTypes from 'prop-types'
 
 import { useRouter } from 'next/router'
+
 import MainLayout from '../../layouts/MainLayout'
 
 const Character = ({ character }) => {
@@ -39,6 +41,11 @@ export async function getStaticProps ({ params }) {
   const character = res.data
 
   return { props: { character } }
+}
+
+Character.propTypes = {
+  character: PropTypes.shape({
+  })
 }
 
 export default Character
