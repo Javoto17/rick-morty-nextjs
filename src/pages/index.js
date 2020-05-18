@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useForm } from 'react-hook-form'
 
@@ -30,7 +30,6 @@ const initialFilter = {
 function Home ({ characters }) {
   const [listOfCharacters, setListOfCharacters] = useState(characters)
   const [filter, setFilter] = useState(initialFilter)
-  const refEnd = useRef(null)
 
   const { isNearScreen, fromRef } = useNearScreen(
     {
@@ -41,15 +40,7 @@ function Home ({ characters }) {
   )
 
   useEffect(() => {
-    if (document) {
-      console.log(document.querySelector('#visor-end-list'))
-      console.log(refEnd.current)
-    }
-  }, [])
-
-  useEffect(() => {
     async function getCharacters () {
-      console.log(filter.page)
       const { info, results } = await characterService.getAllCharacters(filter)
       if (info && results) {
         setListOfCharacters(
@@ -77,7 +68,6 @@ function Home ({ characters }) {
   }, [isNearScreen])
 
   useEffect(() => {
-    console.log(isNearScreen)
     if (isNearScreen) {
       console.log('boom')
       onScroll()
